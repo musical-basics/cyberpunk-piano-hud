@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cyberpunk Neon Theme */
+    --background: 220 20% 4%;
+    --foreground: 180 100% 50%;
+    
+    /* Neon Cyan */
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 20% 4%;
+    
+    /* Hot Pink */
+    --secondary: 330 100% 60%;
+    --secondary-foreground: 220 20% 4%;
+    
+    /* Dark panels */
+    --card: 220 20% 8%;
+    --card-foreground: 180 100% 50%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 180 100% 50%;
+    
+    --muted: 220 15% 15%;
+    --muted-foreground: 180 60% 40%;
+    
+    --accent: 330 100% 60%;
+    --accent-foreground: 220 20% 4%;
+    
+    /* Danger/Critical Red */
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 180 100% 30%;
+    --input: 220 20% 12%;
+    --ring: 180 100% 50%;
+    --radius: 0.25rem;
+    
+    /* Neon color utilities */
+    --neon-cyan: 0 255 255;
+    --neon-pink: 255 20 147;
+    --neon-red: 255 0 50;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Neon glow effects */
+  .glow-cyan {
+    text-shadow: 
+      0 0 5px rgb(var(--neon-cyan)),
+      0 0 10px rgb(var(--neon-cyan)),
+      0 0 20px rgb(var(--neon-cyan)),
+      0 0 40px rgb(var(--neon-cyan));
+  }
+  
+  .glow-pink {
+    text-shadow: 
+      0 0 5px rgb(var(--neon-pink)),
+      0 0 10px rgb(var(--neon-pink)),
+      0 0 20px rgb(var(--neon-pink)),
+      0 0 40px rgb(var(--neon-pink));
+  }
+  
+  .glow-red {
+    text-shadow: 
+      0 0 5px rgb(var(--neon-red)),
+      0 0 10px rgb(var(--neon-red)),
+      0 0 20px rgb(var(--neon-red)),
+      0 0 40px rgb(var(--neon-red));
+  }
+  
+  .box-glow-cyan {
+    box-shadow: 
+      0 0 5px rgb(var(--neon-cyan) / 0.5),
+      0 0 10px rgb(var(--neon-cyan) / 0.3),
+      0 0 20px rgb(var(--neon-cyan) / 0.2),
+      inset 0 0 10px rgb(var(--neon-cyan) / 0.1);
+  }
+  
+  .box-glow-pink {
+    box-shadow: 
+      0 0 5px rgb(var(--neon-pink) / 0.5),
+      0 0 10px rgb(var(--neon-pink) / 0.3),
+      0 0 20px rgb(var(--neon-pink) / 0.2),
+      inset 0 0 10px rgb(var(--neon-pink) / 0.1);
+  }
+  
+  .box-glow-red {
+    box-shadow: 
+      0 0 10px rgb(var(--neon-red) / 0.7),
+      0 0 20px rgb(var(--neon-red) / 0.5),
+      0 0 40px rgb(var(--neon-red) / 0.3),
+      inset 0 0 15px rgb(var(--neon-red) / 0.2);
+  }
+  
+  /* Critical overload animation */
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      opacity: 1;
+      text-shadow: 
+        0 0 5px rgb(var(--neon-red)),
+        0 0 10px rgb(var(--neon-red)),
+        0 0 20px rgb(var(--neon-red)),
+        0 0 40px rgb(var(--neon-red)),
+        0 0 60px rgb(var(--neon-red));
+    }
+    20%, 24%, 55% {
+      opacity: 0.6;
+      text-shadow: none;
+    }
+  }
+  
+  @keyframes pulse-red {
+    0%, 100% {
+      box-shadow: 
+        0 0 10px rgb(var(--neon-red) / 0.7),
+        0 0 20px rgb(var(--neon-red) / 0.5),
+        0 0 40px rgb(var(--neon-red) / 0.3);
+      border-color: rgb(var(--neon-red));
+    }
+    50% {
+      box-shadow: 
+        0 0 20px rgb(var(--neon-red) / 0.9),
+        0 0 40px rgb(var(--neon-red) / 0.7),
+        0 0 80px rgb(var(--neon-red) / 0.5);
+      border-color: rgb(var(--neon-red));
+    }
+  }
+  
+  /* Critical overload class - apply to ENGINE HEAT container */
+  .critical-overload {
+    animation: pulse-red 0.5s ease-in-out infinite;
+    border-color: rgb(var(--neon-red)) !important;
+  }
+  
+  .critical-overload .heat-value,
+  .critical-overload .heat-label {
+    color: rgb(var(--neon-red)) !important;
+    animation: flicker 0.3s ease-in-out infinite;
+  }
+  
+  .critical-overload .heat-ring {
+    stroke: rgb(var(--neon-red)) !important;
+    filter: drop-shadow(0 0 10px rgb(var(--neon-red)));
+  }
+  
+  .critical-overload .heat-bar {
+    background: rgb(var(--neon-red)) !important;
+    box-shadow: 0 0 20px rgb(var(--neon-red));
+  }
+  
+  /* Scanline effect */
+  .scanlines::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 100;
+  }
+  
+  /* Terminal cursor blink */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  
+  .cursor-blink::after {
+    content: "_";
+    animation: blink 1s step-end infinite;
+  }
+  
+  /* Scanline animation */
+  @keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(200px); }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-pixel), var(--font-mono), 'Courier New', monospace;
+  }
+}
