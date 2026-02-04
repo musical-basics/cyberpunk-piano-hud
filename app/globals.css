@@ -141,7 +141,7 @@
   .critical-overload .heat-value,
   .critical-overload .heat-label {
     color: rgb(var(--neon-red)) !important;
-    animation: flicker 0.3s ease-in-out infinite;
+    animation: flicker 0.1s ease-in-out infinite;
   }
   
   .critical-overload .heat-ring {
